@@ -3,6 +3,7 @@ import { Application, Assets, isMobile } from "pixi.js";
 import Reels from "./Reels";
 import SpinButton from "../ui/SpinButton";
 import GameUI from "../ui/GameUI";
+import SoundToggleButton from "../ui/SoundToggleButton";
 
 import { assetsManifest } from "../utils/asset-manifest";
 import { designConfig } from "../utils/config";
@@ -47,6 +48,10 @@ export default class App {
 
     const gameUI = new GameUI(this.app.screen.width, designConfig.ui.height);
 
+    const soundToggle = new SoundToggleButton();
+    soundToggle.x = this.app.screen.width - 60;
+    soundToggle.y = 10;
+
     reels.onWinUpdate = (winAmount) => {
       gameUI.updateWin(winAmount);
       gameUI.updateBalance(reels.balance);
@@ -67,11 +72,15 @@ export default class App {
       gameUI.x = 0;
       gameUI.y = this.app.screen.height - gameUI.height;
       gameUI.width = this.app.screen.width;
+
+      soundToggle.x = this.app.screen.width - 120;
+      soundToggle.y = 60;
     };
 
     this.app.stage.addChild(reels);
     this.app.stage.addChild(spinButton);
     this.app.stage.addChild(gameUI);
+    this.app.stage.addChild(soundToggle);
 
     const resizeUI = () => {
       const scale = calculateScale(this.app.screen.width);
