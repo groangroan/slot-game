@@ -1,7 +1,6 @@
 export const reelsConfig = {
   GRID_SIZE: 3,
   SYMBOL_SIZE: 200,
-  SYMBOL_VALUE: 1,
   SPIN_DURATION: 3200,
   REEL_OFFSET_TIME: 200,
   SYMBOL_PREFIX: "sym",
@@ -27,4 +26,5 @@ export const designConfig = {
 export const betConfig = {
   BET: 2,
   BALANCE: 100,
+  SYMBOL_VALUE: 1,
 };

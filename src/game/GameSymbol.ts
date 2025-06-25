@@ -3,10 +3,10 @@ import { designConfig, reelsConfig } from "../utils/config";
 
 export default class GameSymbol extends Container {
   public index: number;
-  public symbolSprite?: Sprite;
-  public frameSprite?: Sprite;
   public isWinning: boolean;
 
+  private symbolSprite?: Sprite;
+  private frameSprite?: Sprite;
   private winTicker: Ticker | null;
   private winTimeout: ReturnType<typeof setTimeout> | null = null;
 
@@ -104,7 +104,7 @@ export default class GameSymbol extends Container {
     ticker.start();
   }
 
-  setWinning(isWinning: boolean) {
+  public setWinning(isWinning: boolean) {
     this.isWinning = isWinning;
     if (isWinning) {
       this.startWinAnimation();
@@ -113,7 +113,7 @@ export default class GameSymbol extends Container {
     }
   }
 
-  public startWinAnimation() {
+  private startWinAnimation() {
     if (this.winTicker) {
       this.stopWinAnimation();
     }

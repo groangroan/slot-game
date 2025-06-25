@@ -11,8 +11,8 @@ export default class Reels extends Container {
   private readonly reels: Container[] = [];
   private readonly symbols: GameSymbol[] = [];
   private readonly reelMask: Graphics;
+  private isSpinning = false;
 
-  public isSpinning = false;
   public balance = betConfig.BALANCE;
   public onWinUpdate?: (winAmount: number) => void;
 
@@ -66,10 +66,6 @@ export default class Reels extends Container {
       )
       .fill(designConfig.colors.primary);
     return mask;
-  }
-
-  public getSymbols(): GameSymbol[] {
-    return this.symbols;
   }
 
   public async spin(disableSpin: (enabled: boolean) => void) {
@@ -183,26 +179,26 @@ export default class Reels extends Container {
 
     for (let row = 0; row < reelsConfig.GRID_SIZE; row++) {
       let current = result[0][row];
-      let run: [number, number][] = [[0, row]];
-      let isWinningRun = true;
+      let spin: [number, number][] = [[0, row]];
+      let isWinningSpin = true;
 
       for (let col = 1; col < reelsConfig.GRID_SIZE; col++) {
-        if (result[col][row] === current && isWinningRun) {
-          run.push([col, row]);
+        if (result[col][row] === current && isWinningSpin) {
+          spin.push([col, row]);
         } else {
-          if (run.length >= 2 && run[0][0] === 0) {
-            winAmount += run.length;
-            winningPositions.push(...run);
+          if (spin.length >= 2 && spin[0][0] === 0) {
+            winAmount += spin.length;
+            winningPositions.push(...spin);
           }
 
           current = result[col][row];
-          run = [[col, row]];
-          isWinningRun = false;
+          spin = [[col, row]];
+          isWinningSpin = false;
         }
       }
-      if (run.length >= 2 && run[0][0] === 0) {
-        winAmount += run.length;
-        winningPositions.push(...run);
+      if (spin.length >= 2 && spin[0][0] === 0) {
+        winAmount += spin.length;
+        winningPositions.push(...spin);
       }
     }
 
