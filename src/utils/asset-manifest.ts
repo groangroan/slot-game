@@ -37,5 +37,12 @@ export const assetsManifest: AssetsManifest = {
         { alias: "logo", src: "assets/logo.svg" },
       ],
     },
+    {
+      name: "sound",
+      assets: [
+        { alias: "sound-on", src: "assets/sound-on.svg" },
+        { alias: "sound-off", src: "assets/sound-off.svg" },
+      ],
+    },
   ],
 };
